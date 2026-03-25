@@ -26,6 +26,10 @@ resource "aws_efs_file_system" "default" {
   provisioned_throughput_in_mibps = var.provisioned_throughput_in_mibps
   throughput_mode                 = var.throughput_mode
 
+  protection {
+    replication_overwrite = var.efs_replication_overwrite_protection_enabled ? "ENABLED" : "DISABLED"
+  }
+
   dynamic "lifecycle_policy" {
     for_each = length(var.transition_to_ia) > 0 ? [1] : []
     content {

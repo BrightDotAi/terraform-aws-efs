@@ -165,3 +165,9 @@ variable "availability_zone_name" {
   description = "AWS Availability Zone in which to create the file system. Used to create a file system that uses One Zone storage classes. If set, a single subnet in the same availability zone should be provided to `subnets`"
   default     = null
 }
+
+variable "efs_replication_overwrite_protection_enabled" {
+  type        = bool
+  description = "Indicates whether replication overwrite protection is enabled."
+  default     = true
+}

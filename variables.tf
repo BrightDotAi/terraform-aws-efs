@@ -168,6 +168,6 @@ variable "availability_zone_name" {
 
 variable "efs_replication_overwrite_protection_enabled" {
   type        = bool
-  description = "Indicates whether replication overwrite protection is enabled."
-  default     = true
+  description = "Indicates whether replication overwrite protection is enabled. Set to null to not manage this setting (required for replication destinations in REPLICATING state)."
+  default     = null
 }

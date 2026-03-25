@@ -165,3 +165,14 @@ variable "availability_zone_name" {
   description = "AWS Availability Zone in which to create the file system. Used to create a file system that uses One Zone storage classes. If set, a single subnet in the same availability zone should be provided to `subnets`"
   default     = null
 }
+
+variable "efs_replication_overwrite_protection" {
+  type        = string
+  description = "The replication overwrite protection setting. Valid values: `ENABLED`, `DISABLED`, or `null` to skip managing the protection block (use for replication destinations in REPLICATING state)."
+  default     = "ENABLED"
+
+  validation {
+    condition     = var.efs_replication_overwrite_protection == null || try(contains(["ENABLED", "DISABLED"], var.efs_replication_overwrite_protection), false)
+    error_message = "Valid values are ENABLED, DISABLED, or null."
+  }
+}

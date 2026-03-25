@@ -166,8 +166,13 @@ variable "availability_zone_name" {
   default     = null
 }
 
-variable "efs_replication_overwrite_protection_enabled" {
-  type        = bool
-  description = "Indicates whether replication overwrite protection is enabled. Set to null to not manage this setting (required for replication destinations in REPLICATING state)."
-  default     = null
+variable "efs_replication_overwrite_protection" {
+  type        = string
+  description = "The replication overwrite protection setting. Valid values: `ENABLED`, `DISABLED`, or `null` to skip managing the protection block (use for replication destinations in REPLICATING state)."
+  default     = "ENABLED"
+
+  validation {
+    condition     = var.efs_replication_overwrite_protection == null || try(contains(["ENABLED", "DISABLED"], var.efs_replication_overwrite_protection), false)
+    error_message = "Valid values are ENABLED, DISABLED, or null."
+  }
 }

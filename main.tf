@@ -27,9 +27,9 @@ resource "aws_efs_file_system" "default" {
   throughput_mode                 = var.throughput_mode
 
   dynamic "protection" {
-    for_each = var.efs_replication_overwrite_protection_enabled != null ? [1] : []
+    for_each = var.efs_replication_overwrite_protection != null ? [1] : []
     content {
-      replication_overwrite = var.efs_replication_overwrite_protection_enabled ? "ENABLED" : "DISABLED"
+      replication_overwrite = var.efs_replication_overwrite_protection
     }
   }
 

@@ -8,5 +8,4 @@ test_defaults:
 
   before_init:
     - spacelift-configure-paths
-    - spacelift-git-use-https
 
